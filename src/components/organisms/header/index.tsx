@@ -52,7 +52,7 @@ export const Header = (props: Props) => {
         >
           새 글 작성
         </Link>
-        {false ? (
+        {true ? (
           <button className="flex items-center">
             <HiOutlineUser className="text-2xl" />
             <HiChevronDown />
