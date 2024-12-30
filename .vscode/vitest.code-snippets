@@ -1,0 +1,26 @@
+{
+  "desc": {
+    "scope": "typescript",
+    "prefix": "tdesc",
+    "description": "add describe line",
+    "body": ["describe('$1', () => {$0})"]
+  },
+  "test": {
+    "scope": "typescript",
+    "prefix": "ttest",
+    "description": "add test line",
+    "body": ["test('$1', () => {$0})"]
+  },
+  "async test": {
+    "scope": "typescript",
+    "prefix": "tasync",
+    "description": "add async test line",
+    "body": ["test('$1', async () => {$0})"]
+  },
+  "init vitest": {
+    "scope": "typescript",
+    "prefix": "!vitest",
+    "description": "initialize vitest file",
+    "body": ["import { test, describe, expect } from 'vitest';", ""]
+  }
+}

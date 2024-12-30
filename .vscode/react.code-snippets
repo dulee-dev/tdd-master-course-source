@@ -1,0 +1,30 @@
+{
+  "init component": {
+    "scope": "typescriptreact",
+    "prefix": "!component",
+    "description": "init component",
+    "body": [
+      "import clsx from 'clsx';",
+      "",
+      "interface Props {",
+      "  className?: string;",
+      "}",
+      "",
+      "export const ${1:Component} = (props: Props) => {",
+      "  return <div className={clsx(props.className)}>$0</div>;",
+      "};",
+      ""
+    ]
+  },
+  "init page": {
+    "scope": "typescriptreact",
+    "prefix": "!page",
+    "description": "init page",
+    "body": [
+      "export default function ${1:Page}() {",
+      "  return <>$0</>;",
+      "};",
+      ""
+    ]
+  }
+}

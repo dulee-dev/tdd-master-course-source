@@ -1,0 +1,28 @@
+Task:
+  ☐ 전체
+  ☐ 요구사항 분석(문제 상황, 목표 등)
+    main
+      title, author.nickname, createAt, body, isAuthor
+      localizeDate();
+
+    author-aside
+      id, nickname, imgUrl
+
+    comment-section
+      isAuthorized
+
+    footer
+
+  ☐ 개발 전략(테스트 시나리오, 우선순위 - 후순위로 미룰게 있나?, 작업 목록 작성)
+
+  ☐ 작업 목록: @must @could @should @won't
+    ✔ main @done(24-12-28 21:03)
+      ✔ isAuthor -> true/false @done(24-12-28 21:03)
+      ✔ localizedDate(); @done(24-12-28 21:03)
+
+    ✔ author-aside @done(24-12-29 05:24)
+    ✔ comment-section @done(24-12-29 05:24)
+
+  ☐ 회고
+
+  ☐ 추가

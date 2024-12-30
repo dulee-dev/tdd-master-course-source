@@ -1,0 +1,48 @@
+{
+  "locator": {
+    "scope": "typescript",
+    "prefix": "locator",
+    "description": "add locator",
+    "body": ["readonly ${0:name}: Locator;"]
+  },
+  "desc": {
+    "scope": "typescript",
+    "prefix": "pdesc",
+    "description": "add describe line",
+    "body": ["test.describe('$1', () => {$0})"]
+  },
+  "test": {
+    "scope": "typescript",
+    "prefix": "ptest",
+    "description": "add test line",
+    "body": ["test('$1', async ({ page, context }) => {$0})"]
+  },
+  "step": {
+    "scope": "typescript",
+    "prefix": "pstep",
+    "description": "add step line",
+    "body": ["await test.step('$1', async () => {$0})"]
+  },
+  "init": {
+    "scope": "typescript",
+    "prefix": "!playwright",
+    "description": "add step line",
+    "body": ["import { test, expect } from '@playwright/test'", "", "$0"]
+  },
+  "helper": {
+    "scope": "typescript",
+    "prefix": "!helper",
+    "description": "init helper",
+    "body": [
+      "import { BaseHelper } from '@__tests__/playwright/base-helper';",
+      "import { BrowserContext, Locator, Page, expect } from '@playwright/test';",
+      "",
+      "export class Helper extends BaseHelper {",
+      "  constructor(page: Page, context: BrowserContext) {",
+      "    super(page, context);",
+      "  }",
+      "}",
+      ""
+    ]
+  }
+}
