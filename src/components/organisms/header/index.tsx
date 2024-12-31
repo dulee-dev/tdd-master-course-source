@@ -11,6 +11,10 @@ import {
 
 interface Props {
   className?: string;
+  user?: {
+    nickname: string;
+  };
+  contentAuthorNickname?: string;
 }
 
 export const Header = (props: Props) => {
@@ -21,6 +25,7 @@ export const Header = (props: Props) => {
         layoutStyles.px,
         props.className
       )}
+      data-testid={'header'}
     >
       <div className="flex items-center">
         <Link href="/">
@@ -32,10 +37,12 @@ export const Header = (props: Props) => {
             className="mr-4"
           />
         </Link>
-        <Link href="/users/290243c6-4d57-4727-90ed-5791b550c9aa">
-          <span>{'dulee'}</span>
-          <span>님 블로그</span>
-        </Link>
+        {props.contentAuthorNickname && (
+          <Link href="/users/290243c6-4d57-4727-90ed-5791b550c9aa">
+            <span>{props.contentAuthorNickname}</span>
+            <span>님 블로그</span>
+          </Link>
+        )}
       </div>
       <div className="flex items-center">
         <Link href="/notification" className="p-3">
@@ -52,8 +59,8 @@ export const Header = (props: Props) => {
         >
           새 글 작성
         </Link>
-        {true ? (
-          <button className="flex items-center">
+        {props.user !== undefined ? (
+          <button className="flex items-center" aria-label="user-menu">
             <HiOutlineUser className="text-2xl" />
             <HiChevronDown />
           </button>

@@ -3,11 +3,15 @@ import { ContentDetailCommentSection } from '@/components/organisms/content-deta
 import { ContentDetailMain } from '@/components/organisms/content-detail-main';
 import { Footer } from '@/components/organisms/footer';
 import { Header } from '@/components/organisms/header';
+import { getAuthUser } from '@/effects/authorization';
+import { cookies } from 'next/headers';
 
-export default function ContentsDetail() {
+export default async function ContentsDetail() {
+  const user = await getAuthUser(cookies);
+
   return (
     <>
-      <Header />
+      <Header user={user} />
       <ContentDetailMain />
       <ContentDetailAuthorAside />
       <ContentDetailCommentSection />
