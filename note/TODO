@@ -19,10 +19,13 @@ Task:
     "정상"의 경우까지의 예외들을 하나씩 처리해줌.
 
   ☐ 작업 목록: @must @could @should @won't
-    ☐ header
-      ☐ 로그인x -> 로그인 버튼이 보임
-      ☐ 로그인o -> 사용자메뉴가 보임
-      ☐ {게시판 작성자}님 블로그 보임
+    ☐ guard
+      ☐ if content not exist -> redirect to /contents
+
+    ✔ header @done(25-01-01 11:53)
+      ✔ 로그인x -> 로그인 버튼이 보임 @done(25-01-01 11:53)
+      ✔ 로그인o -> 사용자메뉴가 보임 @done(25-01-01 11:53)
+      ✔ {게시판 작성자}님 블로그 보임 @done(25-01-01 11:53)
     ☐ main
       ☐ title, author.nickname, createdAt, body 보임
     ☐ author-aside

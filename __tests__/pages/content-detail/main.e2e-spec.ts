@@ -1,5 +1,5 @@
-import { userFixtures } from '@__tests__/fixtures/content-fixture';
-import { contentFixtures } from '@__tests__/fixtures/user-fixture';
+import { userFixtures } from '@__tests__/fixtures/user-fixture';
+import { contentFixtures } from '@__tests__/fixtures/content-fixture';
 import { BaseHelper } from '@__tests__/playwright/base-helper';
 import { test, expect } from '@playwright/test';
 
@@ -29,10 +29,7 @@ test.describe('header', () => {
     ).toBeVisible();
   });
 
-  test('if visit, "{작성자}님 블로그" is visible', async ({
-    page,
-    context,
-  }) => {
+  test('if visit, "{작성자}님 블로그" is visible', async ({ page }) => {
     const content = contentFixtures[0];
     const user = userFixtures[0];
 
