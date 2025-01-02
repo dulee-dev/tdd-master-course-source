@@ -1,3 +1,4 @@
+import { ContentView } from '@/domains/content/content.type';
 import { localizeDate } from '@/libs/sub-string';
 import { layoutStyles } from '@/styles/layout-styles';
 import { middleDot } from '@/utils/string';
@@ -6,21 +7,24 @@ import Link from 'next/link';
 
 interface Props {
   className?: string;
+  content: ContentView;
 }
 
 export const ContentDetailMain = (props: Props) => {
   return (
     <main className={clsx('mt-8', layoutStyles.px, props.className)}>
       <header>
-        <h1 className="text-4xl font-bold leading-normal">{'title'}</h1>
+        <h1 className="text-4xl font-bold leading-normal">
+          {props.content.title}
+        </h1>
         <div>
-          <span>{'dulee'}</span>
+          <span>{props.content.author.nickname}</span>
           <span>
             {` `}
             {middleDot}
             {` `}
           </span>
-          <span>{localizeDate(new Date('2024-12-24T12:00:00'))}</span>
+          <span>{localizeDate(props.content.createAt)}</span>
         </div>
         {false && (
           <div className="flex justify-end">
@@ -31,7 +35,7 @@ export const ContentDetailMain = (props: Props) => {
           </div>
         )}
       </header>
-      <div>{'body'}</div>
+      <div>{props.content.body}</div>
     </main>
   );
 };

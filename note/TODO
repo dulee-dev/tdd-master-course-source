@@ -19,20 +19,20 @@ Task:
     "정상"의 경우까지의 예외들을 하나씩 처리해줌.
 
   ☐ 작업 목록: @must @could @should @won't
-    ☐ guard
-      ☐ if content not exist -> redirect to /contents
+    ✔ guard @done(25-01-02 02:30)
+      ✔ if content not exist -> redirect to /contents @done(25-01-02 02:30)
 
     ✔ header @done(25-01-01 11:53)
       ✔ 로그인x -> 로그인 버튼이 보임 @done(25-01-01 11:53)
       ✔ 로그인o -> 사용자메뉴가 보임 @done(25-01-01 11:53)
       ✔ {게시판 작성자}님 블로그 보임 @done(25-01-01 11:53)
-    ☐ main
-      ☐ title, author.nickname, createdAt, body 보임
-    ☐ author-aside
-      ☐ author.imgUrl, author.nickname 보임
-    ☐ comment-section
-      ☐ 로그인 안된경우 -> textarea 클릭시 /users/sign-in으로 리다이렉트
-      ☐  된경우 -> 리다이렉트 안됨
+    ✔ main @done(25-01-02 03:01)
+      ✔ title, author.nickname, createdAt, body 보임 @done(25-01-02 03:01)
+    ✔ author-aside @done(25-01-02 03:08)
+      ✔ author.imgUrl, author.nickname 보임 @done(25-01-02 03:08)
+    ✔ comment-section @done(25-01-02 03:55)
+      ✔ 로그인 안된경우 -> textarea 클릭시 /users/sign-in으로 리다이렉트 @done(25-01-02 03:55)
+      ✔  된경우 -> 리다이렉트 안됨 @done(25-01-02 03:55)
 
   ☐ 회고
 

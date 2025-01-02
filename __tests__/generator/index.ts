@@ -30,6 +30,7 @@ export const gen = {
     instance: (parital?: Partial<User>): User => ({
       id: faker.string.uuid(),
       nickname: faker.person.firstName(),
+      imgUrl: gen.img(),
       ...parital,
     }),
   },
