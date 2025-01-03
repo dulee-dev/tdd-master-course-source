@@ -9,7 +9,7 @@ interface Props {
 
 export const ContentItem = (props: Props) => {
   return (
-    <div className={clsx(props.className)}>
+    <div className={clsx(props.className)} data-testid="content-item">
       <Link href={`/contents/${'id'}`} className="flex justify-center">
         <Image width={600} height={600} src="/file.svg" alt={'title'} />
       </Link>

@@ -1,38 +1,24 @@
-Task:
+content list page:
   ☐ 전체
   ☐ 요구사항 분석(문제 상황, 목표 등)
-    if content not exist -> /contents redirect
-
-    header
-      로그인 유무 -> 헤더가 바뀜
-      게시글 작성자도 헤더에 들어감
-    main
-      title, author.nickname, createdAt, body
-    author-aside
-      author.imgUrl, author.nickname
-    comment-section
-      isAuthorized
+    컨텐츠뷰에 대해서 페이지네이션, 정렬, 검색 지원
 
   ☐ 개발 전략(테스트 시나리오, 우선순위 - 후순위로 미룰게 있나?, 작업 목록 작성)
-    순수/비순수함수는 가장 작은 단위로 만들어서 따로 테스트
-    전체페이지는
-    "정상"의 경우까지의 예외들을 하나씩 처리해줌.
+    의존성 순서대로 개발
+      pagination -> sort -> search
 
   ☐ 작업 목록: @must @could @should @won't
-    ✔ guard @done(25-01-02 02:30)
-      ✔ if content not exist -> redirect to /contents @done(25-01-02 02:30)
+    ✔ header @done(25-01-03 01:26)
+      있는 공용 테스트 사용
+    ☐ pagination
+      item 14개로 page button이 2개고, page 2에 item이 2개인거 확인
+    ☐ 초기상태
+      아이템 12개, 첫번째 아이템이 최신
+    ☐ sort
+      제목순으로 설정시, 첫번째 아이템의 제목만 확인
+    ☐ search
+      유일한 제목의 일부로 검색시, 한개만 찾아짐
 
-    ✔ header @done(25-01-01 11:53)
-      ✔ 로그인x -> 로그인 버튼이 보임 @done(25-01-01 11:53)
-      ✔ 로그인o -> 사용자메뉴가 보임 @done(25-01-01 11:53)
-      ✔ {게시판 작성자}님 블로그 보임 @done(25-01-01 11:53)
-    ✔ main @done(25-01-02 03:01)
-      ✔ title, author.nickname, createdAt, body 보임 @done(25-01-02 03:01)
-    ✔ author-aside @done(25-01-02 03:08)
-      ✔ author.imgUrl, author.nickname 보임 @done(25-01-02 03:08)
-    ✔ comment-section @done(25-01-02 03:55)
-      ✔ 로그인 안된경우 -> textarea 클릭시 /users/sign-in으로 리다이렉트 @done(25-01-02 03:55)
-      ✔  된경우 -> 리다이렉트 안됨 @done(25-01-02 03:55)
 
   ☐ 회고
 

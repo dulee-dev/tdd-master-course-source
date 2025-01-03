@@ -1,8 +1,8 @@
 import { ContentDetailAuthorAside } from '@/components/organisms/content-detail-author-aside';
 import { ContentDetailCommentSection } from '@/components/organisms/content-detail-comment-section';
+import { ContentDetailHeader } from '@/components/organisms/content-detail-header';
 import { ContentDetailMain } from '@/components/organisms/content-detail-main';
 import { Footer } from '@/components/organisms/footer';
-import { Header } from '@/components/organisms/header';
 import { getAuthUser } from '@/effects/authorization';
 import { contentApi } from '@/effects/main/content-api.effect';
 import { cookies } from 'next/headers';
@@ -20,7 +20,7 @@ export default async function ContentsDetail({
 
   return (
     <>
-      <Header
+      <ContentDetailHeader
         contentAuthorNickname={response.data.content.author.nickname}
         user={user}
       />

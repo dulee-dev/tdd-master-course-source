@@ -35,7 +35,10 @@ export const ContentsMain = (props: Props) => {
           <ContentItem key={c} className="mt-8" />
         ))}
       </div>
-      <div className="flex justify-center items-center mt-8">
+      <div
+        className="flex justify-center items-center mt-8"
+        data-testid="pagination"
+      >
         {list(0, 1).map((c) => (
           <button
             key={c}
