@@ -22,4 +22,13 @@ describe('contentApi', () => {
     if (response.status !== 200) throw new Error();
     expect(response.data.content).toEqual(expected);
   });
+
+  test('countAll', async () => {
+    const search = contentFixtures[0].title;
+
+    const response = await contentApi.countAll(search);
+
+    expect(response.status).toEqual(200);
+    expect(response.data.count).toEqual(1);
+  });
 });

@@ -1,14 +1,21 @@
+'use client';
+
 import { ContentItem } from '@/components/molecules/content-item';
+import { useInputText } from '@/hooks/use-input-text';
 import { layoutStyles } from '@/styles/layout-styles';
 import clsx from 'clsx';
 import { list } from 'radashi';
 import { HiSearch } from 'react-icons/hi';
+import { usePages } from './hooks/use-pages';
 
 interface Props {
   className?: string;
 }
 
 export const ContentsMain = (props: Props) => {
+  const { text: search, onChange: onChangeSearch } = useInputText('');
+  const { pages, onSubmit: onSubmitPage } = usePages(search);
+
   return (
     <div className={clsx(layoutStyles.mx, props.className)}>
       <div className="flex items-center mx-auto max-w-96">
@@ -24,6 +31,8 @@ export const ContentsMain = (props: Props) => {
           <input
             type="text"
             className="bg-transparent outline-none grow px-4 py-1"
+            onChange={onChangeSearch}
+            value={search}
           />
           <button>
             <HiSearch className="text-xl" />

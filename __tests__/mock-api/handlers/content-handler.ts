@@ -5,13 +5,25 @@ import { http, HttpResponse } from 'msw';
 import { omit } from 'radashi';
 
 export const contentHandlers = [
-  http.get(process.env.NEXT_PUBLIC_API_BASE_URL + '/contents', () => {
-    return HttpResponse.json({
-      id: 'c7b3d8e0-5e0b-4b0f-8b3a-3b9f4b3d3b3d',
-      firstName: 'John',
-      lastName: 'Maverick',
-    });
-  }),
+  http.get(
+    process.env.NEXT_PUBLIC_API_BASE_URL + '/contents/count',
+    ({ request }) => {
+      const url = new URL(request.url);
+
+      const search = url.searchParams.get('search');
+
+      const filtered = search
+        ? contentFixtures.filter((c) => c.title.includes(search))
+        : contentFixtures;
+
+      const count = filtered.length;
+
+      return HttpResponse.json({
+        data: { count },
+        status: 200,
+      });
+    }
+  ),
 
   http.get(
     process.env.NEXT_PUBLIC_API_BASE_URL + '/contents/:id',
