@@ -1,23 +1,34 @@
+'use client';
+
 import { localizeDate } from '@/libs/sub-string';
 import { layoutStyles } from '@/styles/layout-styles';
 import { middleDot } from '@/utils/string';
 import clsx from 'clsx';
 import { InputImage } from '../input-image';
+import { useContentEditable } from '@/hooks/use-content-editable';
+import { useInputImage } from '@/hooks/use-input-image';
 
 interface Props {
   className?: string;
 }
 
 export const ContentCreateForm = (props: Props) => {
+  const { text: title, onInput: onInputTitle } = useContentEditable('');
+  const { text: body, onInput: onInputBody } = useContentEditable('');
+  const {
+    src: thumbnailSrc,
+    url: thumbnailUrl,
+    onChange: onChangeThumbnail,
+  } = useInputImage('/file.svg');
+
   return (
     <form className={clsx(layoutStyles.mx, props.className)}>
       <div
         contentEditable
         suppressContentEditableWarning
         className="text-4xl font-bold leading-normal outline-none"
-      >
-        title
-      </div>
+        onInput={onInputTitle}
+      ></div>
       <div className="mb-8">
         <span>{'dulee'}</span>
         <span>{` ${middleDot} `}</span>
@@ -27,11 +38,10 @@ export const ContentCreateForm = (props: Props) => {
         contentEditable
         suppressContentEditableWarning
         className="leading-snug outline-none min-h-48 pb-12 border-b-2 mb-12"
-      >
-        body
-      </div>
+        onInput={onInputBody}
+      ></div>
       <div className="flex justify-center mb-12">
-        <InputImage />
+        <InputImage src={thumbnailSrc} onChange={onChangeThumbnail} />
       </div>
       <div className="flex justify-center mb-20">
         <button
