@@ -17,7 +17,7 @@ test.describe('guard', () => {
 
     const id = faker.string.uuid();
 
-    await helper.gotoTargetPage(id, false);
+    await helper.gotoTargetPage(id);
     await helper.strictHaveUrl('/contents');
   });
 });
@@ -35,7 +35,7 @@ test.describe('header', () => {
     const content = contentFixtures[0];
     const user = userFixtures[0];
 
-    await helper.gotoTargetPage(content.id, false);
+    await helper.gotoTargetPage(content.id);
     await expect(
       page.getByTestId('header').getByText(`${user.nickname}님 블로그`)
     ).toBeVisible();
@@ -48,7 +48,7 @@ test.describe('main', () => {
     const content = contentFixtures[0];
     const user = userFixtures[0];
 
-    await helper.gotoTargetPage(content.id, false);
+    await helper.gotoTargetPage(content.id);
 
     await expect(helper.getMain.getByText(content.title)).toBeVisible();
     await expect(helper.getMain.getByText(user.nickname)).toBeVisible();
@@ -65,7 +65,7 @@ test.describe('author-aside', () => {
     const content = contentFixtures[0];
     const user = userFixtures[0];
 
-    await helper.gotoTargetPage(content.id, false);
+    await helper.gotoTargetPage(content.id);
 
     await expect(
       helper.getAuthorAside.getByAltText(user.nickname)
@@ -82,7 +82,7 @@ test.describe('comment-section', () => {
     const helper = new Helper(page, context);
     const content = contentFixtures[0];
 
-    await helper.gotoTargetPage(content.id, false);
+    await helper.gotoTargetPage(content.id);
 
     await helper.getCommentSection.getByRole('textbox').click();
     await helper.strictHaveUrl('/users/sign-in');
@@ -97,7 +97,7 @@ test.describe('comment-section', () => {
     const user = userFixtures[0];
 
     await helper.signIn(user.nickname);
-    await helper.gotoTargetPage(content.id, false);
+    await helper.gotoTargetPage(content.id);
 
     await helper.getCommentSection.getByRole('textbox').click();
     await expect(page).not.toHaveURL('/users/sign-in');

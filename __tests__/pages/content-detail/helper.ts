@@ -17,9 +17,8 @@ export class Helper extends BaseHelper {
     return `/contents/${id}`;
   }
 
-  async gotoTargetPage(id: string, assert: boolean) {
+  async gotoTargetPage(id: string) {
     const url = this.getUrl(id);
     await this.page.goto(url);
-    if (assert === true) await expect(this.page).toHaveURL(url);
   }
 }

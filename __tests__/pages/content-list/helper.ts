@@ -18,9 +18,8 @@ export class Helper extends BaseHelper {
     this.getSortOption = this.page.getByLabel('sort');
   }
 
-  async gotoTargetPage(assert: boolean) {
+  async gotoTargetPage() {
     await this.page.goto(this.url);
-    if (assert) await this.strictHaveUrl(this.url);
   }
 
   getPageButton(num: number) {
