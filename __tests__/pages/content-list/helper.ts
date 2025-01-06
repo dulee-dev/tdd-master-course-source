@@ -7,10 +7,15 @@ export class Helper extends BaseHelper {
   readonly getPagination: Locator;
   readonly getContentItems: Locator;
 
+  readonly getSearchInput: Locator;
+  readonly getSortOption: Locator;
+
   constructor(page: Page, context: BrowserContext) {
     super(page, context);
     this.getPagination = this.page.getByTestId('pagination');
     this.getContentItems = this.page.getByTestId('content-item');
+    this.getSearchInput = this.page.getByRole('textbox', { name: 'search' });
+    this.getSortOption = this.page.getByLabel('sort');
   }
 
   async gotoTargetPage(assert: boolean) {
