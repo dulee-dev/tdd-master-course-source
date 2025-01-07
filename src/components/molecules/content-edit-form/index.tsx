@@ -31,7 +31,7 @@ export const ContentEditForm = (props: Props) => {
         body
       </div>
       <div className="flex justify-center mb-12">
-        <InputImage />
+        <InputImage aria-label="thumbnail" alt="thumbnail" />
       </div>
       <div className="flex justify-center mb-20">
         <button

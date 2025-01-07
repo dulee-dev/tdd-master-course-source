@@ -7,13 +7,14 @@ interface Props {
   src: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   'aria-label'?: string;
+  alt: string;
 }
 
 export const InputImage = (props: Props) => {
   return (
     <div className={clsx(props.className)}>
       <label htmlFor="thumnail" className="cursor-pointer">
-        <Image width={200} height={200} alt="thumbnail" src={props.src} />
+        <Image width={200} height={200} alt={props.alt} src={props.src} />
       </label>
       <input
         type="file"

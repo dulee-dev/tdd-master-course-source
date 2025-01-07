@@ -6,6 +6,7 @@ export class Helper extends BaseHelper {
   readonly getTitle: Locator;
   readonly getBody: Locator;
   readonly getThumbnail: Locator;
+  readonly getThumbnailSrc: Locator;
   readonly getSumbit: Locator;
 
   constructor(page: Page, context: BrowserContext) {
@@ -14,6 +15,7 @@ export class Helper extends BaseHelper {
     this.getTitle = this.page.getByLabel('title');
     this.getBody = this.page.getByLabel('body');
     this.getThumbnail = this.page.getByLabel('thumbnail');
+    this.getThumbnailSrc = this.page.getByAltText('thumbnail');
     this.getSumbit = this.page.getByRole('button', { name: '생성하기' });
   }
 

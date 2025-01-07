@@ -1,9 +1,11 @@
+import { imgFileName } from '@__tests__/fixtures/file-name';
 import {
   BrowserContext,
   expect,
   type Locator,
   type Page,
 } from '@playwright/test';
+import path from 'path';
 
 export class BaseHelper {
   readonly page: Page;
@@ -24,6 +26,17 @@ export class BaseHelper {
         url: this.baseUrl,
       },
     ]);
+  }
+
+  uploadFile() {
+    const fileChooserPromise = this.page.waitForEvent('filechooser');
+
+    const setFile = async (fileName: string) => {
+      const fileChooser = await fileChooserPromise;
+      await fileChooser.setFiles(path.join('__tests__', 'fixtures', fileName));
+    };
+
+    return setFile;
   }
 
   async strictHaveUrl(relative: string) {
