@@ -6,6 +6,7 @@ interface Props {
   className?: string;
   src: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  'aria-label'?: string;
 }
 
 export const InputImage = (props: Props) => {
@@ -20,6 +21,7 @@ export const InputImage = (props: Props) => {
         className="hidden"
         id="thumnail"
         onChange={props.onChange}
+        aria-label={props['aria-label']}
       />
     </div>
   );

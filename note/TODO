@@ -16,6 +16,9 @@ content-create-page:
     테스트와 함수로 잘 쪼개서 개발
 
   ☐ 작업 목록: @must @could @should @won't
+    ☐ guard
+      ☐ 인증이 안된 유저는 /users/sign-in으로 redirect
+
     ✔ title, body 바인딩 @done(25-01-07 02:35)
     ✔ thumbnail @done(25-01-07 03:16)
       ✔ upload api #### input image file 선택시 public/의 이미지 경로 리턴 @done(25-01-07 03:16)

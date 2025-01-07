@@ -30,6 +30,7 @@ export const ContentCreateForm = (props: Props) => {
         suppressContentEditableWarning
         className="text-4xl font-bold leading-normal outline-none"
         onInput={onInputTitle}
+        aria-label="title"
       ></div>
       <div className="mb-8">
         <span>{'dulee'}</span>
@@ -41,9 +42,14 @@ export const ContentCreateForm = (props: Props) => {
         suppressContentEditableWarning
         className="leading-snug outline-none min-h-48 pb-12 border-b-2 mb-12"
         onInput={onInputBody}
+        aria-label="body"
       ></div>
       <div className="flex justify-center mb-12">
-        <InputImage src={thumbnailSrc} onChange={onChangeThumbnail} />
+        <InputImage
+          src={thumbnailSrc}
+          onChange={onChangeThumbnail}
+          aria-label="thumbnail"
+        />
       </div>
       <div className="flex justify-center mb-20">
         <button

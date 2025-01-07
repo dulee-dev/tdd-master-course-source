@@ -25,7 +25,8 @@ test.describe('guard', () => {
 test.describe('header', () => {
   const content = contentFixtures[0];
   const url = getUrl(content.id);
-  headerTest(url);
+  headerTest.notSignIn(url);
+  headerTest.signIn(url);
 
   test('if visit, "{작성자}님 블로그" is visible', async ({
     page,

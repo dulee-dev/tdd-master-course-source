@@ -6,7 +6,8 @@ import { contentFixtures } from '@__tests__/fixtures/content-fixture';
 const url = '/contents';
 
 test.describe('header', () => {
-  headerTest(url);
+  headerTest.notSignIn(url);
+  headerTest.signIn(url);
 });
 
 test.describe('items', () => {
