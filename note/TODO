@@ -16,19 +16,19 @@ content-create-page:
     테스트와 함수로 잘 쪼개서 개발
 
   ☐ 작업 목록: @must @could @should @won't
-    ☐ guard
-      ☐ 인증이 안된 유저는 /users/sign-in으로 redirect
+    ✔ guard @done(25-01-09 07:30)
+      ✔ 인증이 안된 유저는 /users/sign-in으로 redirect @done(25-01-09 07:30)
 
     ✔ title, body 바인딩 @done(25-01-07 02:35)
     ✔ thumbnail @done(25-01-07 03:16)
       ✔ upload api #### input image file 선택시 public/의 이미지 경로 리턴 @done(25-01-07 03:16)
       ✔ upload 완료시, src변경 @done(25-01-07 03:16)
 
-    ☐ 폼
-      ☐ title 2~80
-      ☐ body 0~20000
-      ☐ thumbnail은 required
-      ☐ 모두 유효시 제출버튼 활성화
+    ✔ 폼 @done(25-01-09 07:30)
+      ✔ title 2~80 @done(25-01-09 07:30)
+      ✔ body 0~20000 @done(25-01-09 07:30)
+      ✔ thumbnail은 required @done(25-01-09 07:30)
+      ✔ 모두 유효시 제출버튼 활성화 @done(25-01-09 07:30)
     ☐ 생성
       ☐ api
         ☐ 성공시 새로 생성된 컨텐츠 리턴 [200]

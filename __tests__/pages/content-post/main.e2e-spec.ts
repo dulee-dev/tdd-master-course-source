@@ -3,6 +3,7 @@ import { Helper } from './helper';
 import { guardTest, headerTest } from '@__tests__/playwright/shared-test';
 import { userFixtures } from '@__tests__/fixtures/user-fixture';
 import { imgFileName } from '@__tests__/fixtures/file-name';
+import { faker } from '@faker-js/faker';
 
 test.describe('content-post page', () => {
   const url = '/contents/post';
@@ -17,16 +18,20 @@ test.describe('content-post page', () => {
   });
 
   test.describe('form', () => {
+    test.beforeEach(async ({ page, context }) => {
+      const helper = new Helper(page, context);
+      const user = userFixtures[0];
+
+      await helper.signIn(user.nickname);
+      await helper.gotoTargetPage();
+    });
+
     test.describe('input image', () => {
       test('if select image file, thumbnail preview src is changed', async ({
         page,
         context,
       }) => {
         const helper = new Helper(page, context);
-        const user = userFixtures[0];
-
-        await helper.signIn(user.nickname);
-        await helper.gotoTargetPage();
 
         const setFile = helper.uploadFile();
         await helper.getThumbnail.evaluate((el: HTMLInputElement) =>
@@ -38,6 +43,58 @@ test.describe('content-post page', () => {
           'src',
           '/file.svg'
         );
+      });
+    });
+
+    test.describe('validation', () => {
+      test('if title length 81, submit disabled', async ({ page, context }) => {
+        const title = faker.string.sample(81);
+
+        const helper = new Helper(page, context);
+        await helper.setUpValidation();
+        await helper.fillForm({
+          title,
+        });
+        await expect(helper.getSumbit).toBeDisabled();
+      });
+
+      test('if title length 1, submit disabled', async ({ page, context }) => {
+        const title = faker.string.sample(1);
+
+        const helper = new Helper(page, context);
+        await helper.setUpValidation();
+        await helper.fillForm({
+          title,
+        });
+        await expect(helper.getSumbit).toBeDisabled();
+      });
+
+      test('if body length 20001, submit disabled', async ({
+        page,
+        context,
+      }) => {
+        const body = faker.string.sample(20001);
+
+        const helper = new Helper(page, context);
+        await helper.setUpValidation();
+        await helper.fillForm({
+          body,
+        });
+        await expect(helper.getSumbit).toBeDisabled();
+      });
+
+      test('if thumbnail not selected, submit disabled', async ({
+        page,
+        context,
+      }) => {
+        const title = faker.string.sample(2);
+
+        const helper = new Helper(page, context);
+        await helper.fillForm({
+          title,
+        });
+        await page.waitForTimeout(2000);
+        await expect(helper.getSumbit).toBeDisabled();
       });
     });
   });

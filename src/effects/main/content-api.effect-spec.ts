@@ -19,7 +19,6 @@ describe('contentApi', () => {
       pageTake,
       search,
     });
-
     expect(response.status).toEqual(200);
     expect(response.data.contents[0].title).toEqual(content.title);
     expect(response.data.contents).toHaveLength(1);
