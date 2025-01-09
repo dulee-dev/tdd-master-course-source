@@ -114,3 +114,12 @@ export const contentFixtures: Content[] = [
     authorId: '39bf588d-871d-4c51-8d60-1b5df88c1dbc',
   },
 ];
+
+export const contentCreated: Content = {
+  id: '2f08d4b8-51bc-49e7-8f51-b1393214ed4f',
+  createAt: new Date('2024-01-10T00:56:12.982Z'),
+  title: 'The Plague',
+  body: 'fess infinite purse gee whether in than near',
+  thumbnail: '/vercel.svg',
+  authorId: '39bf588d-871d-4c51-8d60-1b5df88c1dbc',
+};

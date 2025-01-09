@@ -8,12 +8,17 @@ import { InputImage } from '../input-image';
 import { useContentEditable } from '@/hooks/use-content-editable';
 import { useInputImage } from '@/hooks/use-input-image';
 import { useFormStatus } from './hooks/use-form-status';
+import { MouseEventHandler } from 'react';
+import { useRouter } from 'next/navigation';
+import { contentCreated } from '@__tests__/fixtures/content-fixture';
 
 interface Props {
   className?: string;
 }
 
 export const ContentCreateForm = (props: Props) => {
+  const router = useRouter();
+
   const { text: title, onInput: onInputTitle } = useContentEditable('');
   const { text: body, onInput: onInputBody } = useContentEditable('');
   const {
@@ -22,6 +27,12 @@ export const ContentCreateForm = (props: Props) => {
     onChange: onChangeThumbnail,
   } = useInputImage('/file.svg');
   const formStatus = useFormStatus({ title, body, thumbnailUrl });
+  const onClickSubmit: MouseEventHandler<HTMLButtonElement> = (ev) => {
+    ev.preventDefault();
+
+    const url = `/contents/${contentCreated.id}`;
+    router.push(url);
+  };
 
   return (
     <form className={clsx(layoutStyles.mx, props.className)}>
@@ -58,6 +69,7 @@ export const ContentCreateForm = (props: Props) => {
             'px-4 py-2 rounded font-bold bg-green-300 text-black disabled:bg-neutral-800 disabled:text-white'
           }
           disabled={!formStatus}
+          onClick={onClickSubmit}
         >
           생성하기
         </button>

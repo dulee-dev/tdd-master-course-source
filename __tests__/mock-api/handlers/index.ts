@@ -1,3 +1,4 @@
+import { delayMiddleware } from '../middleware/delay-middleware';
 import { contentHandlers } from './content-handler';
 
-export const mswHandler = [...contentHandlers];
+export const mswHandler = [delayMiddleware, ...contentHandlers];

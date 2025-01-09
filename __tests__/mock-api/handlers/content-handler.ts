@@ -1,8 +1,11 @@
 import { ContentView } from '@/domains/content/content.type';
-import { contentFixtures } from '@__tests__/fixtures/content-fixture';
+import {
+  contentCreated,
+  contentFixtures,
+} from '@__tests__/fixtures/content-fixture';
 import { userFixtures } from '@__tests__/fixtures/user-fixture';
 import { castNullableStrToNum } from '@__tests__/libs/cast-nullable-str-to-num';
-import { http, HttpResponse, delay } from 'msw';
+import { http, HttpResponse } from 'msw';
 import { omit } from 'radashi';
 
 export const contentHandlers = [
@@ -10,7 +13,6 @@ export const contentHandlers = [
     process.env.NEXT_PUBLIC_API_BASE_URL + '/contents',
     async ({ request }) => {
       const url = new URL(request.url);
-      // await delay(1000);
 
       const pageTake = castNullableStrToNum(url.searchParams.get('pageTake'));
       const pageNum = castNullableStrToNum(url.searchParams.get('pageNum'));
@@ -77,6 +79,25 @@ export const contentHandlers = [
   ),
 
   http.get(
+    process.env.NEXT_PUBLIC_API_BASE_URL + `/contents/${contentCreated.id}`,
+    () => {
+      const author = userFixtures.find((c) => c.id === contentCreated.authorId);
+
+      if (!author) throw new Error();
+
+      const content: ContentView = {
+        ...omit(contentCreated, ['authorId']),
+        author,
+      };
+
+      return HttpResponse.json({
+        data: { content },
+        status: 200,
+      });
+    }
+  ),
+
+  http.get(
     process.env.NEXT_PUBLIC_API_BASE_URL + '/contents/:id',
     ({ params }) => {
       const { id } = params;
@@ -104,6 +125,30 @@ export const contentHandlers = [
       return HttpResponse.json({
         data: { content },
         status: 200,
+      });
+    }
+  ),
+
+  http.post(
+    process.env.NEXT_PUBLIC_API_BASE_URL + '/contents',
+    ({ request }) => {
+      const { body, headers } = request;
+
+      const auth = headers.get('authorization');
+
+      if (auth === null)
+        return HttpResponse.json({
+          status: 401,
+        });
+
+      const content = {
+        ...contentCreated,
+        createdAt: new Date(),
+      };
+
+      return HttpResponse.json({
+        data: { content },
+        status: 201,
       });
     }
   ),

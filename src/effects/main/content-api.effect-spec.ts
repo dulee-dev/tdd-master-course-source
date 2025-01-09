@@ -1,8 +1,11 @@
-import { contentFixtures } from '@__tests__/fixtures/content-fixture';
+import {
+  contentCreated,
+  contentFixtures,
+} from '@__tests__/fixtures/content-fixture';
 import { test, describe, expect } from 'vitest';
 import { contentApi } from './content-api.effect';
 import { ContentView } from '@/domains/content/content.type';
-import { omit } from 'radashi';
+import { omit, pick } from 'radashi';
 import { userFixtures } from '@__tests__/fixtures/user-fixture';
 import { contentSortOption } from '@/domains/content/content.constant';
 
@@ -48,5 +51,25 @@ describe('contentApi', () => {
     expect(response.status).toEqual(200);
     if (response.status !== 200) throw new Error();
     expect(response.data.content).toEqual(expected);
+  });
+
+  test('create', async () => {
+    const user = userFixtures[0];
+    const content = contentCreated;
+
+    const authorization = user.nickname;
+    const body = pick(content, ['title', 'body', 'thumbnail']);
+
+    const response = await contentApi.create({
+      authorization,
+      ...body,
+    });
+
+    expect(response.status).toEqual(201);
+    if (response.status !== 201) throw new Error();
+
+    const expected = omit(content, ['createAt']);
+    expect(response.data.content).toMatchObject(expected);
+    // createdAt
   });
 });

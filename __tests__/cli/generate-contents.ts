@@ -7,14 +7,14 @@ import { list } from 'radashi';
 const main = (len: number) => {
   const instance = list(0, len - 1).map((i) => {
     const user = userFixtures[0];
-    if (i === 1)
-      return gen.content.instance({ authorId: user.id, createAt: new Date() });
-    if (i === 2)
-      return gen.content.instance({
-        authorId: user.id,
-        title: '00000000' + faker.string.sample(),
-      });
-
+    // if (i === 1)
+    //   return gen.content.instance({ authorId: user.id, createAt: new Date() });
+    // if (i === 2)
+    //   return gen.content.instance({
+    //     authorId: user.id,
+    //     title: '00000000' + faker.string.sample(),
+    //   });
+    // return gen.content.instance({ authorId: user.id });
     return gen.content.instance({ authorId: user.id });
   });
 
@@ -22,4 +22,4 @@ const main = (len: number) => {
   console.log(str);
 };
 
-main(14);
+main(1);

@@ -1,3 +1,4 @@
+import { Content } from '@/domains/content/content.entity';
 import { ContentSortOption, ContentView } from '@/domains/content/content.type';
 import { jsonDateParser } from 'json-date-parser';
 import qs from 'qs';
@@ -57,6 +58,42 @@ export const contentApi = {
     const data = await fetch(url);
     const text = await data.text();
 
+    const json = JSON.parse(text, jsonDateParser);
+
+    return json;
+  },
+
+  async create({
+    authorization,
+    ...body
+  }: Pick<Content, 'title' | 'body' | 'thumbnail'> & {
+    authorization: string;
+  }): Promise<
+    | {
+        data: {
+          content: Content;
+        };
+        status: 201;
+      }
+    | {
+        status: 400;
+      }
+    | {
+        status: 401;
+      }
+  > {
+    const url = process.env.NEXT_PUBLIC_API_BASE_URL + '/contents';
+    const strBody = JSON.stringify(body);
+
+    const data = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: authorization,
+      },
+      body: strBody,
+    });
+    const text = await data.text();
     const json = JSON.parse(text, jsonDateParser);
 
     return json;

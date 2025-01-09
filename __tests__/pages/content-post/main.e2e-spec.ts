@@ -4,6 +4,7 @@ import { guardTest, headerTest } from '@__tests__/playwright/shared-test';
 import { userFixtures } from '@__tests__/fixtures/user-fixture';
 import { imgFileName } from '@__tests__/fixtures/file-name';
 import { faker } from '@faker-js/faker';
+import { contentCreated } from '@__tests__/fixtures/content-fixture';
 
 test.describe('content-post page', () => {
   const url = '/contents/post';
@@ -96,6 +97,29 @@ test.describe('content-post page', () => {
         await page.waitForTimeout(2000);
         await expect(helper.getSumbit).toBeDisabled();
       });
+    });
+
+    test('if ok, redirect to created content detail page', async ({
+      page,
+      context,
+    }) => {
+      const helper = new Helper(page, context);
+      const created = contentCreated;
+
+      const title = created.title;
+      const body = created.body;
+      const fileName = imgFileName;
+
+      await helper.fillForm({
+        title,
+        body,
+        fileName,
+      });
+      await helper.getSumbit.click();
+
+      const url = `/contents/${created.id}`;
+      await helper.strictHaveUrl(url);
+      await expect(page.getByText(title)).toBeVisible();
     });
   });
 });
