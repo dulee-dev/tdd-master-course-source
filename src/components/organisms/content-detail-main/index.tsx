@@ -24,7 +24,7 @@ export const ContentDetailMain = (props: Props) => {
             {middleDot}
             {` `}
           </span>
-          <span>{localizeDate(props.content.createAt)}</span>
+          <span>{localizeDate(props.content.createdAt)}</span>
         </div>
         {false && (
           <div className="flex justify-end">

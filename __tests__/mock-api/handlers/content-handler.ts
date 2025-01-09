@@ -5,6 +5,7 @@ import {
 } from '@__tests__/fixtures/content-fixture';
 import { userFixtures } from '@__tests__/fixtures/user-fixture';
 import { castNullableStrToNum } from '@__tests__/libs/cast-nullable-str-to-num';
+import { faker } from '@faker-js/faker';
 import { http, HttpResponse } from 'msw';
 import { omit } from 'radashi';
 
@@ -36,7 +37,7 @@ export const contentHandlers = [
             return a.title > b.title ? 1 : -1;
           }
 
-          return a.createAt > b.createAt ? -1 : 1;
+          return a.createdAt > b.createdAt ? -1 : 1;
         });
       }
 

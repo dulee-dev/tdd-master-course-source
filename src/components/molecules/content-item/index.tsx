@@ -36,7 +36,7 @@ export const ContentItem = (props: Props) => {
           />
           <span>{props.author.nickname}</span>
         </div>
-        <div>{localizeDate(props.createAt)}</div>
+        <div>{localizeDate(props.createdAt)}</div>
       </div>
     </div>
   );

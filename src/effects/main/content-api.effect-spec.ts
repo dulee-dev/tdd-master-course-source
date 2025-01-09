@@ -68,8 +68,9 @@ describe('contentApi', () => {
     expect(response.status).toEqual(201);
     if (response.status !== 201) throw new Error();
 
-    const expected = omit(content, ['createAt']);
+    const expected = omit(content, ['id', 'createdAt']);
     expect(response.data.content).toMatchObject(expected);
-    // createdAt
+    expect(response.data.content.id).toBeUuid();
+    expect(response.data.content.createdAt).toBeCloseDate(new Date());
   });
 });

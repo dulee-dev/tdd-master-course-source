@@ -12,6 +12,7 @@ export default defineConfig({
     setupFiles: [
       '__tests__/libs/import-env.ts',
       '__tests__/libs/init-mock-server.ts',
+      '__tests__/vitest/expect-extend.ts',
     ],
   },
   plugins: [tsconfigPaths()],

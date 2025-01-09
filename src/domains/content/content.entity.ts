@@ -1,6 +1,6 @@
 export interface Content {
   id: string;
-  createAt: Date;
+  createdAt: Date;
   title: string;
   body: string;
   thumbnail: string;

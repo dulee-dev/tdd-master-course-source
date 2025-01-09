@@ -11,7 +11,7 @@ export const gen = {
   content: {
     instance: (partial?: Partial<Content>): Content => ({
       id: faker.string.uuid(),
-      createAt: faker.date.past(),
+      createdAt: faker.date.past(),
       title: faker.book.title(),
       body: faker.word.words({ count: { min: 5, max: 25 } }),
       thumbnail: gen.img(),

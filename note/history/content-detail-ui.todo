@@ -2,7 +2,7 @@ Task:
   ☐ 전체
   ☐ 요구사항 분석(문제 상황, 목표 등)
     main
-      title, author.nickname, createAt, body, isAuthor
+      title, author.nickname, createdAt, body, isAuthor
       localizeDate();
 
     author-aside

@@ -8,7 +8,7 @@ const main = (len: number) => {
   const instance = list(0, len - 1).map((i) => {
     const user = userFixtures[0];
     // if (i === 1)
-    //   return gen.content.instance({ authorId: user.id, createAt: new Date() });
+    //   return gen.content.instance({ authorId: user.id, createdAt: new Date() });
     // if (i === 2)
     //   return gen.content.instance({
     //     authorId: user.id,

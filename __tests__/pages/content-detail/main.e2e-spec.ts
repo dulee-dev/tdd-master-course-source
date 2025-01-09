@@ -54,7 +54,7 @@ test.describe('main', () => {
     await expect(helper.getMain.getByText(content.title)).toBeVisible();
     await expect(helper.getMain.getByText(user.nickname)).toBeVisible();
     await expect(
-      helper.getMain.getByText(localizeDate(content.createAt))
+      helper.getMain.getByText(localizeDate(content.createdAt))
     ).toBeVisible();
     await expect(helper.getMain.getByText(content.body)).toBeVisible();
   });
