@@ -136,8 +136,9 @@ export const contentHandlers = [
       const { body, headers } = request;
 
       const auth = headers.get('authorization');
+      const user = userFixtures.find((c) => c.nickname === auth);
 
-      if (auth === null)
+      if (user === undefined)
         return HttpResponse.json({
           status: 401,
         });
