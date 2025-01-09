@@ -3,7 +3,7 @@ import { contentFixtures } from './fixtures/content-fixture';
 
 test('tempt', async ({ page, context }) => {
   const contents = contentFixtures.toSorted((a, b) =>
-    a.createAt > b.createAt ? -1 : 1
+    a.createdAt > b.createdAt ? -1 : 1
   );
 
   await page.goto('/contents');
