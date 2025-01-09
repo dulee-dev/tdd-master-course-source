@@ -11,6 +11,7 @@ import { useFormStatus } from './hooks/use-form-status';
 import { MouseEventHandler } from 'react';
 import { useRouter } from 'next/navigation';
 import { contentCreated } from '@__tests__/fixtures/content-fixture';
+import { createContentAction } from './server-side';
 
 interface Props {
   className?: string;
@@ -27,10 +28,18 @@ export const ContentCreateForm = (props: Props) => {
     onChange: onChangeThumbnail,
   } = useInputImage('/file.svg');
   const formStatus = useFormStatus({ title, body, thumbnailUrl });
-  const onClickSubmit: MouseEventHandler<HTMLButtonElement> = (ev) => {
+  const onClickSubmit: MouseEventHandler<HTMLButtonElement> = async (ev) => {
     ev.preventDefault();
+    if (thumbnailUrl === undefined) return;
 
-    const url = `/contents/${contentCreated.id}`;
+    const content = await createContentAction({
+      title,
+      body,
+      thumbnail: thumbnailUrl,
+    });
+    if (content === undefined) return;
+
+    const url = `/contents/${content.id}`;
     router.push(url);
   };
 

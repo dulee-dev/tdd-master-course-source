@@ -5,6 +5,7 @@ import { userFixtures } from '@__tests__/fixtures/user-fixture';
 import { imgFileName } from '@__tests__/fixtures/file-name';
 import { faker } from '@faker-js/faker';
 import { contentCreated } from '@__tests__/fixtures/content-fixture';
+import { uuidGlobalRegExp, uuidRegExp } from '@__tests__/libs/reg-exp';
 
 test.describe('content-post page', () => {
   const url = '/contents/post';
@@ -117,8 +118,10 @@ test.describe('content-post page', () => {
       });
       await helper.getSumbit.click();
 
-      const url = `/contents/${created.id}`;
-      await helper.strictHaveUrl(url);
+      const url = new RegExp(
+        helper.baseUrl + `/contents/${uuidGlobalRegExp.source}`
+      );
+      await expect(page).toHaveURL(url);
       await expect(page.getByText(title)).toBeVisible();
     });
   });
