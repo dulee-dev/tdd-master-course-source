@@ -8,6 +8,7 @@ import { ContentView } from '@/domains/content/content.type';
 import { omit, pick } from 'radashi';
 import { userFixtures } from '@__tests__/fixtures/user-fixture';
 import { contentSortOption } from '@/domains/content/content.constant';
+import { reset } from '@__tests__/mock-api/virtual/setup';
 
 describe('contentApi', () => {
   test('findAll', async () => {
@@ -72,5 +73,7 @@ describe('contentApi', () => {
     expect(response.data.content).toMatchObject(expected);
     expect(response.data.content.id).toBeUuid();
     expect(response.data.content.createdAt).toBeCloseDate(new Date());
+
+    reset();
   });
 });

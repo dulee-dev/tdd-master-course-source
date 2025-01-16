@@ -10,8 +10,9 @@ export default defineConfig({
       '**/*.effect-{test,spec}.?(c|m)[jt]s?(x)',
     ],
     setupFiles: [
-      '__tests__/libs/import-env.ts',
-      '__tests__/libs/init-mock-server.ts',
+      '__tests__/exec/import-env.ts',
+      '__tests__/exec/init-mock-server.ts',
+      '__tests__/exec/setup-virtual-fixtures.ts',
       '__tests__/vitest/expect-extend.ts',
     ],
   },
