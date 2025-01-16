@@ -1,9 +1,5 @@
+import { Content } from '@/domains/content/content.entity';
 import { ContentView } from '@/domains/content/content.type';
-import {
-  contentCreated,
-  contentFixtures,
-} from '@__tests__/fixtures/content-fixture';
-import { userFixtures } from '@__tests__/fixtures/user-fixture';
 import { castNullableStrToNum } from '@__tests__/libs/cast-nullable-str-to-num';
 import { faker } from '@faker-js/faker';
 import { http, HttpResponse } from 'msw';
@@ -27,7 +23,7 @@ export const contentHandlers = [
       const startAt = (pageNum - 1) * pageTake;
       const endAt = pageNum * pageTake;
 
-      let inter = contentFixtures;
+      let inter = globalThis.virtual.contents;
       if (search !== null) {
         inter = inter.filter((c) => c.title.includes(search));
       }
@@ -41,16 +37,25 @@ export const contentHandlers = [
         });
       }
 
-      const contents: ContentView[] = inter.slice(startAt, endAt).map((c) => {
-        const author = userFixtures.find((d) => c.authorId === d.id);
-        if (!author) throw new Error();
+      const contents: (ContentView | undefined)[] = inter
+        .slice(startAt, endAt)
+        .map((c) => {
+          const author = globalThis.virtual.users.find(
+            (d) => c.authorId === d.id
+          );
+          if (!author) return undefined;
 
-        const content: ContentView = {
-          ...omit(c, ['authorId']),
-          author,
-        };
-        return content;
-      });
+          const content: ContentView = {
+            ...omit(c, ['authorId']),
+            author,
+          };
+          return content;
+        });
+      const someError = contents.some((c) => c === undefined);
+      if (someError)
+        return HttpResponse.json({
+          status: 500,
+        });
 
       return HttpResponse.json({
         data: { contents },
@@ -67,32 +72,13 @@ export const contentHandlers = [
       const search = url.searchParams.get('search');
 
       const filtered = search
-        ? contentFixtures.filter((c) => c.title.includes(search))
-        : contentFixtures;
+        ? globalThis.virtual.contents.filter((c) => c.title.includes(search))
+        : globalThis.virtual.contents;
 
       const count = filtered.length;
 
       return HttpResponse.json({
         data: { count },
-        status: 200,
-      });
-    }
-  ),
-
-  http.get(
-    process.env.NEXT_PUBLIC_API_BASE_URL + `/contents/${contentCreated.id}`,
-    () => {
-      const author = userFixtures.find((c) => c.id === contentCreated.authorId);
-
-      if (!author) throw new Error();
-
-      const content: ContentView = {
-        ...omit(contentCreated, ['authorId']),
-        author,
-      };
-
-      return HttpResponse.json({
-        data: { content },
         status: 200,
       });
     }
@@ -107,14 +93,16 @@ export const contentHandlers = [
           status: 400,
         });
 
-      const found = contentFixtures.find((c) => c.id === id);
+      const found = globalThis.virtual.contents.find((c) => c.id === id);
 
       if (!found)
         return HttpResponse.json({
           status: 404,
         });
 
-      const author = userFixtures.find((c) => c.id === found.authorId);
+      const author = globalThis.virtual.users.find(
+        (c) => c.id === found.authorId
+      );
 
       if (!author) throw new Error();
 
@@ -132,21 +120,28 @@ export const contentHandlers = [
 
   http.post(
     process.env.NEXT_PUBLIC_API_BASE_URL + '/contents',
-    ({ request }) => {
-      const { body, headers } = request;
+    async ({ request }) => {
+      const { headers } = request;
+      const data = (await request.json()) as Pick<
+        Content,
+        'title' | 'body' | 'thumbnail'
+      >;
 
       const auth = headers.get('authorization');
-      const user = userFixtures.find((c) => c.nickname === auth);
+      const user = globalThis.virtual.users.find((c) => c.nickname === auth);
 
       if (user === undefined)
         return HttpResponse.json({
           status: 401,
         });
 
-      const content = {
-        ...contentCreated,
+      const content: Content = {
+        ...data,
+        id: faker.string.uuid(),
+        authorId: user.id,
         createdAt: new Date(),
       };
+      globalThis.virtual.contents.push(content);
 
       return HttpResponse.json({
         data: { content },

@@ -1,0 +1,41 @@
+content-create-page:
+  ☐ 전체
+  ☐ 요구사항 분석(문제 상황, 목표 등)
+    컨텐츠 생성 페이지 개발
+      title, body, thumbnail을 입력
+    양식
+      title (2~80)
+      body (0~2만자)
+      thumbnail 필수
+      다 유효시 제출버튼 활성화
+
+    api에서는 생성 예외도 처리
+    e2e에서는 처리 x
+
+  ☐ 개발 전략(테스트 시나리오, 우선순위 - 후순위로 미룰게 있나?, 작업 목록 작성)
+    테스트와 함수로 잘 쪼개서 개발
+
+  ☐ 작업 목록: @must @could @should @won't
+    ✔ guard @done(25-01-09 07:30)
+      ✔ 인증이 안된 유저는 /users/sign-in으로 redirect @done(25-01-09 07:30)
+
+    ✔ title, body 바인딩 @done(25-01-07 02:35)
+    ✔ thumbnail @done(25-01-07 03:16)
+      ✔ upload api #### input image file 선택시 public/의 이미지 경로 리턴 @done(25-01-07 03:16)
+      ✔ upload 완료시, src변경 @done(25-01-07 03:16)
+
+    ✔ 폼 @done(25-01-09 07:30)
+      ✔ title 2~80 @done(25-01-09 07:30)
+      ✔ body 0~20000 @done(25-01-09 07:30)
+      ✔ thumbnail은 required @done(25-01-09 07:30)
+      ✔ 모두 유효시 제출버튼 활성화 @done(25-01-09 07:30)
+    ✔ 생성 @done(25-01-10 02:43)
+      ✔ api @done(25-01-10 02:07)
+        ✔ 성공시 새로 생성된 컨텐츠 리턴 [200] @done(25-01-10 02:07)
+        ✔ 예외 [400], [401] @done(25-01-10 02:07)
+      ✔ 제출시 @done(25-01-10 02:43)
+        ✔ 성공하면 새로 생성된/contents/{id}로 리다이렉트 @done(25-01-10 02:43)
+
+  ☐ 회고
+
+  ☐ 추가

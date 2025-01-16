@@ -1,5 +1,8 @@
+'use client';
+
 import { contentFixtures } from '@__tests__/fixtures/content-fixture';
 import Link from 'next/link';
+import { resetVirtualFixturesAction } from './server-side';
 
 interface LinkItem {
   tag: string;
@@ -30,6 +33,10 @@ const links: LinkItem[] = [
 ];
 
 export const DevNav = () => {
+  const onClick = async () => {
+    await resetVirtualFixturesAction();
+  };
+
   return (
     <div className={'fixed right-10 bottom-10'}>
       {links.map((c) => (
@@ -37,6 +44,7 @@ export const DevNav = () => {
           <Link href={c.href}>{c.tag}</Link>
         </div>
       ))}
+      <button onClick={onClick}>reset</button>
     </div>
   );
 };
