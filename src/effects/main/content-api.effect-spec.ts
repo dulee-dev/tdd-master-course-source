@@ -1,14 +1,12 @@
-import {
-  contentCreated,
-  contentFixtures,
-} from '@__tests__/fixtures/content-fixture';
+import { contentFixtures } from '@__tests__/fixtures/content-fixture';
 import { test, describe, expect } from 'vitest';
 import { contentApi } from './content-api.effect';
 import { ContentView } from '@/domains/content/content.type';
-import { omit, pick } from 'radashi';
+import { omit } from 'radashi';
 import { userFixtures } from '@__tests__/fixtures/user-fixture';
 import { contentSortOption } from '@/domains/content/content.constant';
 import { reset } from '@__tests__/mock-api/virtual/setup';
+import { gen } from '@__tests__/generator';
 
 describe('contentApi', () => {
   test('findAll', async () => {
@@ -56,20 +54,23 @@ describe('contentApi', () => {
 
   test('create', async () => {
     const user = userFixtures[0];
-    const content = contentCreated;
 
     const authorization = user.nickname;
-    const body = pick(content, ['title', 'body', 'thumbnail']);
+    const title = gen.content.title();
+    const body = gen.content.body();
+    const thumbnail = gen.img();
+    const expected = { title, body, thumbnail, authorId: user.id };
 
     const response = await contentApi.create({
       authorization,
-      ...body,
+      title,
+      body,
+      thumbnail,
     });
 
     expect(response.status).toEqual(201);
     if (response.status !== 201) throw new Error();
 
-    const expected = omit(content, ['id', 'createdAt']);
     expect(response.data.content).toMatchObject(expected);
     expect(response.data.content.id).toBeUuid();
     expect(response.data.content.createdAt).toBeCloseDate(new Date());

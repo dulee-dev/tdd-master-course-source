@@ -9,11 +9,14 @@ export const gen = {
   img: () => draw(imgPath) as string,
 
   content: {
+    title: faker.book.title,
+    body: () => faker.word.words({ count: { min: 5, max: 25 } }),
+
     instance: (partial?: Partial<Content>): Content => ({
       id: faker.string.uuid(),
       createdAt: faker.date.past(),
-      title: faker.book.title(),
-      body: faker.word.words({ count: { min: 5, max: 25 } }),
+      title: gen.content.title(),
+      body: gen.content.body(),
       thumbnail: gen.img(),
       authorId: faker.string.uuid(),
       ...partial,

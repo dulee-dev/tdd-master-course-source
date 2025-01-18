@@ -18,6 +18,11 @@ export class BaseHelper {
     this.baseUrl = process.env.NEXT_PUBLIC_WEB_BASE_URL;
   }
 
+  async resetVirtualFixtures() {
+    await this.page.getByRole('button', { name: 'reset' }).click();
+    await expect(this.page.getByText('reset fixture success')).toBeVisible();
+  }
+
   async signIn(authorization: string) {
     await this.context.addCookies([
       {

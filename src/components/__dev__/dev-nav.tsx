@@ -3,6 +3,7 @@
 import { contentFixtures } from '@__tests__/fixtures/content-fixture';
 import Link from 'next/link';
 import { resetVirtualFixturesAction } from './server-side';
+import { toast } from 'react-toastify';
 
 interface LinkItem {
   tag: string;
@@ -35,6 +36,7 @@ const links: LinkItem[] = [
 export const DevNav = () => {
   const onClick = async () => {
     await resetVirtualFixturesAction();
+    toast('reset fixture success', { autoClose: 2000 });
   };
 
   return (

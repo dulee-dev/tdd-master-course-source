@@ -10,7 +10,6 @@ import { useInputImage } from '@/hooks/use-input-image';
 import { useFormStatus } from './hooks/use-form-status';
 import { MouseEventHandler } from 'react';
 import { useRouter } from 'next/navigation';
-import { contentCreated } from '@__tests__/fixtures/content-fixture';
 import { createContentAction } from './server-side';
 
 interface Props {
