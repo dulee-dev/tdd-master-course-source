@@ -52,6 +52,18 @@ describe('contentApi', () => {
     expect(response.data.content).toEqual(expected);
   });
 
+  test('findMyOne', async () => {
+    const content = contentFixtures[0];
+    const author = userFixtures[0];
+
+    const id = content.id;
+
+    const response = await contentApi.findMyOne(id, author.nickname);
+
+    expect(response.status).toEqual(200);
+    expect(response).toHaveProperty('data.content');
+  });
+
   test('create', async () => {
     const user = userFixtures[0];
 

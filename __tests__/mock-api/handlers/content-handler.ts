@@ -118,6 +118,42 @@ export const contentHandlers = [
     }
   ),
 
+  http.get(
+    process.env.NEXT_PUBLIC_API_BASE_URL + '/users/me/contents/:id',
+    ({ params, request }) => {
+      const auth = request.headers.get('authorization');
+      const user = globalThis.virtual.users.find((c) => c.nickname === auth);
+      if (user === undefined)
+        return HttpResponse.json({
+          status: 401,
+        });
+
+      const { id } = params;
+      if (typeof id !== 'string')
+        return HttpResponse.json({
+          status: 400,
+        });
+
+      const found = globalThis.virtual.contents.find(
+        (c) => c.id === id && c.authorId === user.id
+      );
+      if (!found)
+        return HttpResponse.json({
+          status: 404,
+        });
+
+      const content: ContentView = {
+        ...omit(found, ['authorId']),
+        author: user,
+      };
+
+      return HttpResponse.json({
+        data: { content },
+        status: 200,
+      });
+    }
+  ),
+
   http.post(
     process.env.NEXT_PUBLIC_API_BASE_URL + '/contents',
     async ({ request }) => {

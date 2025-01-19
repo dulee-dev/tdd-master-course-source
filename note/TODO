@@ -1,13 +1,29 @@
-introduce-dynamic-mocking:
+content-edit-page:
   ☐ 전체
   ☐ 요구사항 분석(문제 상황, 목표 등)
-    현재 응답이 바뀌어야 테스트가 가능한 상황이 생기는데, 정적인 데이터를 참고하는 방식으로는 불가능함.
-    따라서 동적인 데이터 계층을 추가해서 테스트 가능한 상황을 늘림.
+    생성된 컨텐츠에 대해서, 작성자가 (제목, 본문, 썸네일) 수정 가능
+    처음에 원본 불러와줘야함
 
   ☐ 개발 전략(테스트 시나리오, 우선순위 - 후순위로 미룰게 있나?, 작업 목록 작성)
-    가능하면 확인 가능한 단위로 쪼개서 진행
+    컨텐츠 수정 성공을 기준으로 필요한 만큼 추가 테스트
 
   ☐ 작업 목록: @must @could @should @won't
+    ✔ guard @done(25-01-19 11:01)
+      ✔ unauthorized -> '/users/sign-in' redirect @done(25-01-19 11:01)
+      ✔ content not found -> '/contents' redirect @done(25-01-19 11:01)
+      ✔ not author of content -> '/contents' redirect @done(25-01-19 11:01)
+
+    ☐ header
+      ☐ author home도 테스트
+
+    ☐ init status
+      ☐ title, body, thumbnail...
+  
+    ☐ form validation
+      ☐ title, body, thumbnail
+      ☐ if same submit disabled
+    
+    ☐ edit content
 
   ☐ 회고
 

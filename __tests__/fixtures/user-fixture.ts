@@ -6,4 +6,9 @@ export const userFixtures: User[] = [
     nickname: 'dulee',
     imgUrl: '/window.svg',
   },
+  {
+    id: '2f11b583-61d4-4106-bc66-03ebd8a3dbf5',
+    nickname: 'Anabelle',
+    imgUrl: '/globe.svg',
+  },
 ];

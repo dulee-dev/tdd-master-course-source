@@ -63,6 +63,34 @@ export const contentApi = {
     return json;
   },
 
+  async findMyOne(
+    id: string,
+    authorization: string
+  ): Promise<
+    | {
+        data: {
+          content: ContentView;
+        };
+        status: 200;
+      }
+    | {
+        status: 404;
+      }
+  > {
+    const url =
+      process.env.NEXT_PUBLIC_API_BASE_URL + `/users/me/contents/${id}`;
+    const data = await fetch(url, {
+      headers: {
+        authorization: authorization,
+      },
+    });
+    const text = await data.text();
+
+    const json = JSON.parse(text, jsonDateParser);
+
+    return json;
+  },
+
   async create({
     authorization,
     ...body
