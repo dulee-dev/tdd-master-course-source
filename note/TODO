@@ -13,8 +13,8 @@ content-edit-page:
       ✔ content not found -> '/contents' redirect @done(25-01-19 11:01)
       ✔ not author of content -> '/contents' redirect @done(25-01-19 11:01)
 
-    ☐ header
-      ☐ author home도 테스트
+    ✔ header @done(25-01-19 14:46)
+      ✔ author home도 테스트 @done(25-01-19 14:46)
 
     ☐ init status
       ☐ title, body, thumbnail...
