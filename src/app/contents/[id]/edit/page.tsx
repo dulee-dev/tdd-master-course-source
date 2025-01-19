@@ -1,6 +1,6 @@
 import { ContentEditForm } from '@/components/molecules/content-edit-form';
+import { ContentDetailHeader } from '@/components/organisms/content-detail-header';
 import { Footer } from '@/components/organisms/footer';
-import { Header } from '@/components/organisms/header';
 import { getAuthUser } from '@/effects/authorization';
 import { contentApi } from '@/effects/main/content-api.effect';
 import { cookies } from 'next/headers';
@@ -19,7 +19,10 @@ export default async function ContentsEditPage({
   if (response.status !== 200) redirect('/contents');
   return (
     <>
-      <Header />
+      <ContentDetailHeader
+        contentAuthorNickname={response.data.content.author.nickname}
+        user={user}
+      />
       <ContentEditForm />
       <Footer />
     </>

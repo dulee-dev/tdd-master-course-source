@@ -44,4 +44,25 @@ test.describe('content edit page', () => {
       await helper.strictHaveUrl('/contents');
     });
   });
+
+  test.describe('header', () => {
+    const content = contentFixtures[0];
+    const url = getUrl(content.id);
+    headerTest.signIn(url);
+
+    test('if visit, "{작성자}님 블로그" is visible', async ({
+      page,
+      context,
+    }) => {
+      const content = contentFixtures[0];
+      const user = userFixtures[0];
+      const helper = new Helper(page, context);
+
+      await helper.signIn(user.nickname);
+      await helper.gotoTargetPage(content.id);
+      await expect(
+        page.getByTestId('header').getByText(`${user.nickname}님 블로그`)
+      ).toBeVisible();
+    });
+  });
 });
