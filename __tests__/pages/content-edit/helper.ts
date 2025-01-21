@@ -1,7 +1,5 @@
-import { imgFileName } from '@__tests__/fixtures/file-name';
 import { BaseHelper } from '@__tests__/playwright/base-helper';
-import { faker } from '@faker-js/faker';
-import { BrowserContext, Locator, Page, expect } from '@playwright/test';
+import { BrowserContext, Locator, Page } from '@playwright/test';
 
 export class Helper extends BaseHelper {
   readonly getForm: Locator;
@@ -47,16 +45,5 @@ export class Helper extends BaseHelper {
       await this.getThumbnail.evaluate((el: HTMLInputElement) => el.click());
       await setFile(fileName);
     }
-  }
-
-  async setUpValidation() {
-    const title = faker.string.sample(2);
-    const fileName = imgFileName;
-
-    await this.fillForm({
-      title,
-      fileName,
-    });
-    await expect(this.getSumbit).toBeEnabled();
   }
 }

@@ -75,7 +75,7 @@ export const ContentCreateForm = (props: Props) => {
       <div className="flex justify-center mb-20">
         <button
           className={
-            'px-4 py-2 rounded font-bold bg-green-300 text-black disabled:bg-neutral-800 disabled:text-white'
+            'px-4 py-2 rounded font-bold bg-green-300 text-black disabled:bg-neutral-800 disabled:text-white disabled:cursor-not-allowed'
           }
           disabled={!formStatus}
           onClick={onClickSubmit}

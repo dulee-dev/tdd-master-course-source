@@ -16,12 +16,12 @@ content-edit-page:
     ✔ header @done(25-01-19 14:46)
       ✔ author home도 테스트 @done(25-01-19 14:46)
 
-    ☐ init status
-      ☐ title, body, thumbnail...
+    ✔ init status @done(25-01-21 09:25)
+      ✔ title, body, thumbnail... @done(25-01-21 09:25)
   
-    ☐ form validation
-      ☐ title, body, thumbnail
-      ☐ if same submit disabled
+    ✔ form validation @done(25-01-21 11:26)
+      ✔ title, body, thumbnail @done(25-01-21 10:06)
+      ✔ if same submit disabled @done(25-01-21 11:26)
     
     ☐ edit content
 

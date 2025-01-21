@@ -87,5 +87,115 @@ test.describe('content edit page', () => {
         localizeDate(content.createdAt)
       );
     });
+
+    test.describe('input image', () => {
+      test('if select image file, thumbnail preview src is changed', async ({
+        page,
+        context,
+      }) => {
+        const content = contentFixtures[0];
+        const user = userFixtures[0];
+        const helper = new Helper(page, context);
+
+        await helper.signIn(user.nickname);
+        await helper.gotoTargetPage(content.id);
+
+        await expect(helper.getThumbnailSrc).toHaveAttribute(
+          'src',
+          content.thumbnail
+        );
+        const setFile = helper.uploadFile();
+        await helper.getThumbnail.evaluate((el: HTMLInputElement) =>
+          el.click()
+        );
+        await setFile(imgFileName);
+
+        await expect(helper.getThumbnailSrc).not.toHaveAttribute(
+          'src',
+          content.thumbnail
+        );
+      });
+    });
+
+    test.describe('validation', () => {
+      const content = contentFixtures[0];
+      const user = userFixtures[0];
+
+      test.beforeEach(
+        'sign-in and visit content edit page',
+        async ({ page, context }) => {
+          const helper = new Helper(page, context);
+
+          await helper.signIn(user.nickname);
+          await helper.gotoTargetPage(content.id);
+        }
+      );
+
+      test('if title length 81, submit disabled', async ({ page, context }) => {
+        const title = faker.string.sample(81);
+
+        const helper = new Helper(page, context);
+        await helper.fillForm({
+          body: gen.content.body(),
+        });
+        await expect(helper.getSumbit).toBeEnabled();
+
+        await helper.fillForm({
+          title,
+        });
+        await expect(helper.getSumbit).toBeDisabled();
+      });
+
+      test('if title length 1, submit disabled', async ({ page, context }) => {
+        const title = faker.string.sample(1);
+
+        const helper = new Helper(page, context);
+        await helper.fillForm({
+          body: gen.content.body(),
+        });
+        await expect(helper.getSumbit).toBeEnabled();
+
+        await helper.fillForm({
+          title,
+        });
+        await expect(helper.getSumbit).toBeDisabled();
+      });
+
+      test('if body length 20001, submit disabled', async ({
+        page,
+        context,
+      }) => {
+        const body = faker.string.sample(20001);
+
+        const helper = new Helper(page, context);
+        await helper.fillForm({
+          title: gen.content.title(),
+        });
+        await expect(helper.getSumbit).toBeEnabled();
+
+        await helper.fillForm({
+          body,
+        });
+        await expect(helper.getSumbit).toBeDisabled();
+      });
+
+      test('if no values are changed, submit disabled', async ({
+        page,
+        context,
+      }) => {
+        const title = faker.string.sample(2);
+
+        const helper = new Helper(page, context);
+        await helper.fillForm({
+          title,
+        });
+        await expect(helper.getSumbit).toBeEnabled();
+
+        await helper.fillForm({
+          title: content.title,
+        });
+        await expect(helper.getSumbit).toBeDisabled();
+      });
+    });
   });
 });

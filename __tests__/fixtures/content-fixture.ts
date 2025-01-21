@@ -6,7 +6,7 @@ export const contentFixtures: Content[] = [
     createdAt: new Date('2024-03-13T15:47:52.327Z'),
     title: 'Adventures of Huckleberry Finn',
     body: 'or cash state conservation unimportant round toady who opposite that because smoothly though difficult quiet gadzooks muddy accredit round scoff nun slope dense wriggler and',
-    thumbnail: '/window.svg',
+    thumbnail: '/file.svg',
     authorId: '39bf588d-871d-4c51-8d60-1b5df88c1dbc',
   },
   {

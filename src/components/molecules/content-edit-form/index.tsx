@@ -32,8 +32,13 @@ export const ContentEditForm = (props: Props) => {
     src: thumbnailSrc,
     url: thumbnailUrl,
     onChange: onChangeThumbnail,
-  } = useInputImage(props.content.thumbnail);
-  const formStatus = useFormStatus({ title, body, thumbnailUrl });
+  } = useInputImage(props.content.thumbnail, props.content.thumbnail);
+  const formStatus = useFormStatus({
+    title,
+    body,
+    thumbnailUrl,
+    content: props.content,
+  });
   const onClickSubmit: MouseEventHandler<HTMLButtonElement> = async (ev) => {
     ev.preventDefault();
     if (thumbnailUrl === undefined) return;
@@ -85,12 +90,12 @@ export const ContentEditForm = (props: Props) => {
       <div className="flex justify-center mb-20">
         <button
           className={
-            'px-4 py-2 rounded font-bold bg-green-300 text-black disabled:bg-neutral-800 disabled:text-white'
+            'px-4 py-2 rounded font-bold bg-green-300 text-black disabled:bg-neutral-800 disabled:text-white disabled:cursor-not-allowed'
           }
           disabled={!formStatus}
           onClick={onClickSubmit}
         >
-          생성하기
+          수정하기
         </button>
       </div>
     </form>
