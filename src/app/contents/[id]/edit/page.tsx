@@ -23,7 +23,10 @@ export default async function ContentsEditPage({
         contentAuthorNickname={response.data.content.author.nickname}
         user={user}
       />
-      <ContentEditForm />
+      <ContentEditForm
+        content={response.data.content}
+        userNickname={user.nickname}
+      />
       <Footer />
     </>
   );

@@ -7,6 +7,7 @@ import { faker } from '@faker-js/faker';
 import { uuidGlobalRegExp } from '@__tests__/libs/reg-exp';
 import { gen } from '@__tests__/generator';
 import { contentFixtures } from '@__tests__/fixtures/content-fixture';
+import { localizeDate } from '@/libs/sub-string';
 
 test.describe('content edit page', () => {
   const getUrl = (id: string) => `/contents/${id}/edit`;
@@ -63,6 +64,28 @@ test.describe('content edit page', () => {
       await expect(
         page.getByTestId('header').getByText(`${user.nickname}님 블로그`)
       ).toBeVisible();
+    });
+  });
+
+  test.describe('form', () => {
+    test('initial status', async ({ page, context }) => {
+      const content = contentFixtures[0];
+      const user = userFixtures[0];
+      const helper = new Helper(page, context);
+
+      await helper.signIn(user.nickname);
+      await helper.gotoTargetPage(content.id);
+
+      await expect(helper.getTitle).toHaveText(content.title);
+      await expect(helper.getBody).toHaveText(content.body);
+      await expect(helper.getThumbnailSrc).toHaveAttribute(
+        'src',
+        content.thumbnail
+      );
+      await expect(helper.getForm).toContainText(user.nickname);
+      await expect(helper.getForm).toContainText(
+        localizeDate(content.createdAt)
+      );
     });
   });
 });

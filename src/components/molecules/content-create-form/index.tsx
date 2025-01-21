@@ -14,6 +14,7 @@ import { createContentAction } from './server-side';
 
 interface Props {
   className?: string;
+  userNickname: string;
 }
 
 export const ContentCreateForm = (props: Props) => {
@@ -52,7 +53,7 @@ export const ContentCreateForm = (props: Props) => {
         aria-label="title"
       ></div>
       <div className="mb-8">
-        <span>{'dulee'}</span>
+        <span>{props.userNickname}</span>
         <span>{` ${middleDot} `}</span>
         <span>{localizeDate(new Date())}</span>
       </div>

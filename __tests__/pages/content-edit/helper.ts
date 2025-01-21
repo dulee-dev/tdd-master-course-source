@@ -4,6 +4,7 @@ import { faker } from '@faker-js/faker';
 import { BrowserContext, Locator, Page, expect } from '@playwright/test';
 
 export class Helper extends BaseHelper {
+  readonly getForm: Locator;
   readonly getTitle: Locator;
   readonly getBody: Locator;
   readonly getThumbnail: Locator;
@@ -14,6 +15,7 @@ export class Helper extends BaseHelper {
     super(page, context);
 
     this.getTitle = this.page.getByLabel('title');
+    this.getForm = this.page.getByRole('form');
     this.getBody = this.page.getByLabel('body');
     this.getThumbnail = this.page.getByLabel('thumbnail');
     this.getThumbnailSrc = this.page.getByAltText('thumbnail');

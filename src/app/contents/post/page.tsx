@@ -12,7 +12,7 @@ export default async function ContentsPostPage() {
   return (
     <>
       <Header user={user} />
-      <ContentCreateForm />
+      <ContentCreateForm userNickname={user.nickname} />
       <Footer />
     </>
   );
