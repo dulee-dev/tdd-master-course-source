@@ -90,7 +90,7 @@ export const contentHandlers = [
       const { id } = params;
       if (typeof id !== 'string')
         return HttpResponse.json({
-          status: 400,
+          status: 500,
         });
 
       const found = globalThis.virtual.contents.find((c) => c.id === id);
@@ -131,7 +131,7 @@ export const contentHandlers = [
       const { id } = params;
       if (typeof id !== 'string')
         return HttpResponse.json({
-          status: 400,
+          status: 500,
         });
 
       const found = globalThis.virtual.contents.find(
@@ -182,6 +182,51 @@ export const contentHandlers = [
       return HttpResponse.json({
         data: { content },
         status: 201,
+      });
+    }
+  ),
+
+  http.patch(
+    process.env.NEXT_PUBLIC_API_BASE_URL + '/contents/:id',
+    async ({ request, params }) => {
+      const { headers } = request;
+      const auth = headers.get('authorization');
+      const user = globalThis.virtual.users.find((c) => c.nickname === auth);
+      if (user === undefined)
+        return HttpResponse.json({
+          status: 401,
+        });
+      const { id } = params;
+      if (typeof id !== 'string')
+        return HttpResponse.json({
+          status: 500,
+        });
+
+      const data = (await request.json()) as Partial<
+        Pick<Content, 'title' | 'body' | 'thumbnail'>
+      >;
+
+      const found = globalThis.virtual.contents.find(
+        (c) => c.id === id && c.authorId === user.id
+      );
+      if (!found)
+        return HttpResponse.json({
+          status: 404,
+        });
+
+      const content: Content = {
+        ...found,
+        ...data,
+      };
+
+      globalThis.virtual.contents = globalThis.virtual.contents.map((c) => {
+        if (c.id !== id) return c;
+        return content;
+      });
+
+      return HttpResponse.json({
+        data: { content },
+        status: 200,
       });
     }
   ),

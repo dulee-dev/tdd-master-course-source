@@ -126,4 +126,42 @@ export const contentApi = {
 
     return json;
   },
+
+  async edit({
+    authorization,
+    id,
+    ...body
+  }: Partial<Pick<Content, 'title' | 'body' | 'thumbnail'>> & {
+    id: string;
+    authorization: string;
+  }): Promise<
+    | {
+        data: {
+          content: Content;
+        };
+        status: 200;
+      }
+    | {
+        status: 401;
+      }
+    | {
+        status: 404;
+      }
+  > {
+    const url = process.env.NEXT_PUBLIC_API_BASE_URL + '/contents/' + id;
+    const strBody = JSON.stringify(body);
+
+    const data = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: authorization,
+      },
+      body: strBody,
+    });
+    const text = await data.text();
+    const json = JSON.parse(text, jsonDateParser);
+
+    return json;
+  },
 };

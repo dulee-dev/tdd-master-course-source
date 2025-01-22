@@ -23,8 +23,12 @@ content-edit-page:
       ✔ title, body, thumbnail @done(25-01-21 10:06)
       ✔ if same submit disabled @done(25-01-21 11:26)
     
-    ☐ edit content
+    ✔ edit content @done(25-01-22 15:09)
 
   ☐ 회고
+    수정페이지는 기본적으로 생성페이지와 매우 유사하다
+    근데 초깃값을 가져와줘야하는데,
+    그냥 findOne이랑은 별도의 api를 활용해주는게 좋다. (왜냐하면 작성자 일치까지 확인해줘야 하므로)
+
 
   ☐ 추가

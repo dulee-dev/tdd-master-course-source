@@ -10,7 +10,7 @@ import { useInputImage } from '@/hooks/use-input-image';
 import { useFormStatus } from './hooks/use-form-status';
 import { MouseEventHandler } from 'react';
 import { useRouter } from 'next/navigation';
-import { createContentAction } from './server-side';
+import { editContentAction } from './server-side';
 import { ContentView } from '@/domains/content/content.type';
 
 interface Props {
@@ -43,7 +43,8 @@ export const ContentEditForm = (props: Props) => {
     ev.preventDefault();
     if (thumbnailUrl === undefined) return;
 
-    const content = await createContentAction({
+    const content = await editContentAction({
+      id: props.content.id,
       title,
       body,
       thumbnail: thumbnailUrl,

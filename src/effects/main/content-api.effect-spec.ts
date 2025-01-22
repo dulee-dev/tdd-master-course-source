@@ -7,6 +7,7 @@ import { userFixtures } from '@__tests__/fixtures/user-fixture';
 import { contentSortOption } from '@/domains/content/content.constant';
 import { reset } from '@__tests__/mock-api/virtual/setup';
 import { gen } from '@__tests__/generator';
+import { Content } from '@/domains/content/content.entity';
 
 describe('contentApi', () => {
   test('findAll', async () => {
@@ -86,6 +87,32 @@ describe('contentApi', () => {
     expect(response.data.content).toMatchObject(expected);
     expect(response.data.content.id).toBeUuid();
     expect(response.data.content.createdAt).toBeCloseDate(new Date());
+
+    reset();
+  });
+
+  test('edit', async () => {
+    const user = userFixtures[0];
+    const content = contentFixtures[0];
+
+    const authorization = user.nickname;
+    const title = gen.content.title();
+    const body = gen.content.body();
+    const thumbnail = gen.img();
+    const expected: Content = { ...content, title, body, thumbnail };
+
+    const response = await contentApi.edit({
+      authorization,
+      id: content.id,
+      title,
+      body,
+      thumbnail,
+    });
+
+    expect(response.status).toEqual(200);
+    if (response.status !== 200) throw new Error();
+
+    expect(response.data.content).toEqual(expected);
 
     reset();
   });

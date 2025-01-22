@@ -4,7 +4,6 @@ import { guardTest, headerTest } from '@__tests__/playwright/shared-test';
 import { userFixtures } from '@__tests__/fixtures/user-fixture';
 import { imgFileName } from '@__tests__/fixtures/file-name';
 import { faker } from '@faker-js/faker';
-import { uuidGlobalRegExp } from '@__tests__/libs/reg-exp';
 import { gen } from '@__tests__/generator';
 import { contentFixtures } from '@__tests__/fixtures/content-fixture';
 import { localizeDate } from '@/libs/sub-string';
@@ -197,5 +196,29 @@ test.describe('content edit page', () => {
         await expect(helper.getSumbit).toBeDisabled();
       });
     });
+  });
+
+  test('if edit ok, original data is changed', async ({ page, context }) => {
+    const content = contentFixtures[0];
+    const user = userFixtures[0];
+    const title = gen.content.title();
+    const body = gen.content.body();
+    const fileName = imgFileName;
+
+    const helper = new Helper(page, context);
+
+    await helper.signIn(user.nickname);
+    await helper.gotoTargetPage(content.id);
+    await helper.fillForm({
+      title,
+      body,
+      fileName,
+    });
+    await helper.getSumbit.click();
+
+    await helper.strictHaveUrl(`/contents/${content.id}`);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(title);
+
+    await helper.resetVirtualFixtures();
   });
 });
