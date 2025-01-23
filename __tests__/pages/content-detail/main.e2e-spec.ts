@@ -58,6 +58,34 @@ test.describe('main', () => {
     ).toBeVisible();
     await expect(helper.getMain.getByText(content.body)).toBeVisible();
   });
+
+  test.describe('author action btns', () => {
+    test('if not sign-in, btns are invisible', async ({ page, context }) => {
+      const content = contentFixtures[0];
+
+      const helper = new Helper(page, context);
+      await helper.gotoTargetPage(content.id);
+      await expect(helper.getEditBtn).toBeHidden();
+    });
+
+    test('if sign-in but not author, btns are invisible', async ({
+      page,
+      context,
+    }) => {
+      const content = contentFixtures[0];
+      const user = userFixtures[1];
+
+      const helper = new Helper(page, context);
+      await helper.signIn(user.nickname);
+      await helper.gotoTargetPage(content.id);
+      await expect(helper.getEditBtn).toBeHidden();
+    });
+
+    test.skip('if click delete btn, redirect to "/contents" and deleted content is not found', async ({
+      page,
+      context,
+    }) => {});
+  });
 });
 
 test.describe('author-aside', () => {

@@ -1,34 +1,17 @@
-content-edit-page:
+content delete btn:
   ☐ 전체
   ☐ 요구사항 분석(문제 상황, 목표 등)
-    생성된 컨텐츠에 대해서, 작성자가 (제목, 본문, 썸네일) 수정 가능
-    처음에 원본 불러와줘야함
+    현재 컨텐츠 상세페이지에 로그인 유저와 작성자가 같으면 수정, 삭제 버튼이 보이고
+    수정버튼 클릭시 수정페이지로 이동
+    삭제버튼 클릭시 삭제, 삭제후에는 /contents로 이동하고, 원본은 조회 불가능
 
-  ☐ 개발 전략(테스트 시나리오, 우선순위 - 후순위로 미룰게 있나?, 작업 목록 작성)
-    컨텐츠 수정 성공을 기준으로 필요한 만큼 추가 테스트
+  ☐ 개발 전략(테스트 시나리오, 우선순위 - 후순위로 미룰게 있나?, 작업 목록 작성) 
 
   ☐ 작업 목록: @must @could @should @won't
-    ✔ guard @done(25-01-19 11:01)
-      ✔ unauthorized -> '/users/sign-in' redirect @done(25-01-19 11:01)
-      ✔ content not found -> '/contents' redirect @done(25-01-19 11:01)
-      ✔ not author of content -> '/contents' redirect @done(25-01-19 11:01)
-
-    ✔ header @done(25-01-19 14:46)
-      ✔ author home도 테스트 @done(25-01-19 14:46)
-
-    ✔ init status @done(25-01-21 09:25)
-      ✔ title, body, thumbnail... @done(25-01-21 09:25)
-  
-    ✔ form validation @done(25-01-21 11:26)
-      ✔ title, body, thumbnail @done(25-01-21 10:06)
-      ✔ if same submit disabled @done(25-01-21 11:26)
-    
-    ✔ edit content @done(25-01-22 15:09)
+    ☐ 로그인 유저와 작성자가 같을시 수정, 삭제 버튼이 보임
+    ☐ 수정버튼 클릭시 수정페이지로
+    ☐ 삭제버튼 클릭시 삭제 후 /contents로 이동
 
   ☐ 회고
-    수정페이지는 기본적으로 생성페이지와 매우 유사하다
-    근데 초깃값을 가져와줘야하는데,
-    그냥 findOne이랑은 별도의 api를 활용해주는게 좋다. (왜냐하면 작성자 일치까지 확인해줘야 하므로)
-
 
   ☐ 추가
