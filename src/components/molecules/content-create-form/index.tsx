@@ -44,7 +44,7 @@ export const ContentCreateForm = (props: Props) => {
   };
 
   return (
-    <form className={clsx(layoutStyles.mx, props.className)}>
+    <form className={clsx(layoutStyles.mx, 'mt-8', props.className)}>
       <div
         contentEditable
         suppressContentEditableWarning

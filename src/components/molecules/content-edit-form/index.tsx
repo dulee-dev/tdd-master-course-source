@@ -56,7 +56,10 @@ export const ContentEditForm = (props: Props) => {
   };
 
   return (
-    <form className={clsx(layoutStyles.mx, props.className)} role={'form'}>
+    <form
+      className={clsx(layoutStyles.mx, 'mt-8', props.className)}
+      role={'form'}
+    >
       <div
         contentEditable
         suppressContentEditableWarning

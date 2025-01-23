@@ -1,3 +1,4 @@
+import { ContentDetailActionBtns } from '@/components/molecules/content-detail-action-btns';
 import { ContentView } from '@/domains/content/content.type';
 import { localizeDate } from '@/libs/sub-string';
 import { layoutStyles } from '@/styles/layout-styles';
@@ -8,6 +9,7 @@ import Link from 'next/link';
 interface Props {
   className?: string;
   content: ContentView;
+  isAuthor: boolean;
 }
 
 export const ContentDetailMain = (props: Props) => {
@@ -26,12 +28,9 @@ export const ContentDetailMain = (props: Props) => {
           </span>
           <span>{localizeDate(props.content.createdAt)}</span>
         </div>
-        {false && (
+        {props.isAuthor && (
           <div className="flex justify-end">
-            <Link href={`/contents/${'id'}/edit`} className="mr-4">
-              수정
-            </Link>
-            <button>삭제</button>
+            <ContentDetailActionBtns contentId={props.content.id} />
           </div>
         )}
       </header>
