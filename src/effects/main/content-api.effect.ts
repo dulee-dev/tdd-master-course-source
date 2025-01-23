@@ -164,4 +164,35 @@ export const contentApi = {
 
     return json;
   },
+
+  async delete({
+    authorization,
+    id,
+  }: {
+    id: string;
+    authorization: string;
+  }): Promise<
+    | {
+        status: 200;
+      }
+    | {
+        status: 401;
+      }
+    | {
+        status: 404;
+      }
+  > {
+    const url = process.env.NEXT_PUBLIC_API_BASE_URL + '/contents/' + id;
+
+    const data = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        authorization: authorization,
+      },
+    });
+    const text = await data.text();
+    const json = JSON.parse(text, jsonDateParser);
+
+    return json;
+  },
 };

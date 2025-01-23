@@ -81,10 +81,24 @@ test.describe('main', () => {
       await expect(helper.getEditBtn).toBeHidden();
     });
 
-    test.skip('if click delete btn, redirect to "/contents" and deleted content is not found', async ({
+    test('if click delete btn, redirect to "/contents" and deleted content is not found', async ({
       page,
       context,
-    }) => {});
+    }) => {
+      const content = contentFixtures[0];
+      const user = userFixtures[0];
+
+      const helper = new Helper(page, context);
+      await helper.signIn(user.nickname);
+      await helper.gotoTargetPage(content.id);
+      await helper.getDeleteBtn.click();
+      await helper.strictHaveUrl('/contents');
+
+      await helper.gotoTargetPage(content.id);
+      await helper.strictHaveUrl('/contents');
+
+      await helper.resetVirtualFixtures();
+    });
   });
 });
 
