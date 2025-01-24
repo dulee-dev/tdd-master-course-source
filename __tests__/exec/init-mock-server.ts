@@ -1,3 +1,4 @@
+import { checkIsMock } from '@__tests__/libs/check-is-mock';
 import { mockServer } from '@__tests__/mock-api/mock-server';
 
-mockServer.listen();
+if (checkIsMock()) mockServer.listen();

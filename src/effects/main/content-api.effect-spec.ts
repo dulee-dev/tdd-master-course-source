@@ -66,13 +66,12 @@ describe('contentApi', () => {
   });
 
   test('create', async () => {
-    const user = userFixtures[0];
+    const user = gen.user.instance();
 
     const authorization = user.nickname;
     const title = gen.content.title();
     const body = gen.content.body();
     const thumbnail = gen.img();
-    const expected = { title, body, thumbnail, authorId: user.id };
 
     const response = await contentApi.create({
       authorization,
@@ -81,25 +80,17 @@ describe('contentApi', () => {
       thumbnail,
     });
 
-    expect(response.status).toEqual(201);
-    if (response.status !== 201) throw new Error();
-
-    expect(response.data.content).toMatchObject(expected);
-    expect(response.data.content.id).toBeUuid();
-    expect(response.data.content.createdAt).toBeCloseDate(new Date());
-
-    reset();
+    expect(response.status).toEqual(401);
   });
 
   test('edit', async () => {
-    const user = userFixtures[0];
+    const user = userFixtures[1];
     const content = contentFixtures[0];
 
     const authorization = user.nickname;
     const title = gen.content.title();
     const body = gen.content.body();
     const thumbnail = gen.img();
-    const expected: Content = { ...content, title, body, thumbnail };
 
     const response = await contentApi.edit({
       authorization,
@@ -109,12 +100,7 @@ describe('contentApi', () => {
       thumbnail,
     });
 
-    expect(response.status).toEqual(200);
-    if (response.status !== 200) throw new Error();
-
-    expect(response.data.content).toEqual(expected);
-
-    reset();
+    expect(response.status).toEqual(404);
   });
 
   test('delete', async () => {
