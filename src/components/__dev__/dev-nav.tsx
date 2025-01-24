@@ -4,6 +4,7 @@ import { contentFixtures } from '@__tests__/fixtures/content-fixture';
 import Link from 'next/link';
 import { resetVirtualFixturesAction } from './server-side';
 import { toast } from 'react-toastify';
+import { checkIsMock } from '@__tests__/libs/check-is-mock';
 
 interface LinkItem {
   tag: string;
@@ -46,7 +47,7 @@ export const DevNav = () => {
           <Link href={c.href}>{c.tag}</Link>
         </div>
       ))}
-      <button onClick={onClick}>reset</button>
+      {checkIsMock() && <button onClick={onClick}>reset</button>}
     </div>
   );
 };

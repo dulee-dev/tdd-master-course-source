@@ -6,6 +6,7 @@ import { imgFileName } from '@__tests__/fixtures/file-name';
 import { faker } from '@faker-js/faker';
 import { uuidGlobalRegExp, uuidRegExp } from '@__tests__/libs/reg-exp';
 import { gen } from '@__tests__/generator';
+import { checkIsMock } from '@__tests__/libs/check-is-mock';
 
 test.describe('content-post page', () => {
   const url = '/contents/post';
@@ -115,6 +116,10 @@ test.describe('content-post page', () => {
         body,
         fileName,
       });
+      await expect(helper.getSumbit).toBeEnabled();
+
+      if (!checkIsMock()) return;
+
       await helper.getSumbit.click();
 
       const url = new RegExp(

@@ -5,6 +5,7 @@ import { Helper } from './helper';
 import { faker } from '@faker-js/faker';
 import { headerTest } from '@__tests__/playwright/shared-test';
 import { localizeDate } from '@/libs/sub-string';
+import { checkIsMock } from '@__tests__/libs/check-is-mock';
 
 const getUrl = (id: string): string => `/contents/${id}`;
 
@@ -91,6 +92,10 @@ test.describe('main', () => {
       const helper = new Helper(page, context);
       await helper.signIn(user.nickname);
       await helper.gotoTargetPage(content.id);
+      await expect(helper.getDeleteBtn).toBeVisible();
+
+      if (!checkIsMock()) return;
+
       await helper.getDeleteBtn.click();
       await helper.strictHaveUrl('/contents');
 

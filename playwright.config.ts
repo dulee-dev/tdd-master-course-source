@@ -24,6 +24,7 @@ export default defineConfig({
   // workers: process.env.CI ? 1 : undefined,
   workers: 1,
   maxFailures: 10,
+  timeout: 20 * 1000,
   testMatch: '**/*.e2e-spec.ts',
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',

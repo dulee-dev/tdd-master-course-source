@@ -7,6 +7,7 @@ import { faker } from '@faker-js/faker';
 import { gen } from '@__tests__/generator';
 import { contentFixtures } from '@__tests__/fixtures/content-fixture';
 import { localizeDate } from '@/libs/sub-string';
+import { checkIsMock } from '@__tests__/libs/check-is-mock';
 
 test.describe('content edit page', () => {
   const getUrl = (id: string) => `/contents/${id}/edit`;
@@ -214,6 +215,10 @@ test.describe('content edit page', () => {
       body,
       fileName,
     });
+    await expect(helper.getSumbit).toBeEnabled();
+
+    if (!checkIsMock()) return;
+
     await helper.getSumbit.click();
 
     await helper.strictHaveUrl(`/contents/${content.id}`);
