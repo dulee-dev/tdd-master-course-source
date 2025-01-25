@@ -123,7 +123,7 @@ test.describe('content-post page', () => {
       await helper.getSumbit.click();
 
       const url = new RegExp(
-        helper.baseUrl + `/contents/${uuidGlobalRegExp.source}`
+        `^${helper.baseUrl}/contents/${uuidGlobalRegExp.source}$`
       );
       await expect(page).toHaveURL(url);
       await expect(page.getByText(title)).toBeVisible();

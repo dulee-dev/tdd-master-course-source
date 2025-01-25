@@ -45,7 +45,7 @@ export class BaseHelper {
   }
 
   async strictHaveUrl(relative: string) {
-    const absolute = this.baseUrl + relative;
-    await expect(this.page).toHaveURL(absolute);
+    const reg = new RegExp(`^${this.baseUrl}${relative}$`);
+    await expect(this.page).toHaveURL(reg);
   }
 }

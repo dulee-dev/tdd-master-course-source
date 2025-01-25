@@ -13,6 +13,7 @@ import '@__tests__/exec/import-env';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  // testDir: '.',
   testDir: './__tests__',
   /* Run tests in files in parallel */
   fullyParallel: true,
